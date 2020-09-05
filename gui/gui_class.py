@@ -1,18 +1,32 @@
 import PySimpleGUI as sg
 from task import Task
+from Typing import List
 from abc import ABC
 
-def collapse(layout:List[List], key:str) -> sg.pin:
+def collapse(layout, key:str) -> sg.pin:
     return sg.pin(sg.Column(layout, key=key))
 
 class ToDoGUI(ABC):
+    """Layouts:
+            1) Intro Page: Load Saved Queue, or Add New Task? Filename input box
+                - Loading Saved Queue will load Queue and take 
+            2) Current Task Page: Min + Max Layout with varyinhg degrees of detail. Add New Task + Complete Task Buttons
+            3) Add New Task Page: Task Input boxes for each field needed for a task
+            4) View list of On-Hold Tasks to Un-Freeze (Add to head of stack)
+            5) View list of completed tasks to Reopen (Add to bottom of stack)
+            6) View list of all tasks
+
+    Args:
+        ABC ([type]): [description]
+    """
+
     ADD_TASK_LAYOUT = [[sg.Input('Task Name', k='-NAME?-'), sg.Checkbox('High Priority?', '-PRIORITY?-'), sg.Input('Time to Finish', k='-ETC?-')],
                         [sg.Input('Relevant Link',k='-LINK?-')],
                         [sg.Input('Task Description', k='-DESCRIPTION?-')]
                         ]
     SYMBOL_UP =    '▲'
     SYMBOL_DOWN =  '▼'
-    
+
     LOAD_QUEUE_LAYOUT = [[sg.Input('Queue File:')],
                             [sg.Button('Submit')]]
     def __init__(self):

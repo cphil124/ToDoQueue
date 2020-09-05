@@ -12,6 +12,7 @@ class Task(ABC):
         self.complete = False
         self.completion_notes = None
         self.top_priority = priority
+        self.frozen = False # Indicates the task is on-hold. It cannot be worked on any further but it is not complete.
 
     def complete_task(self, note:str) -> None:
         self.completion_notes = note
